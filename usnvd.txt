@@ -1,0 +1,7 @@
+CREATE TABLE vulnerabilities (
+    id VARCHAR(50) PRIMARY KEY,       -- CVE ID (e.g., "CVE-2025-12345")
+    description TEXT NOT NULL,        -- Vulnerability description
+    severity FLOAT,                   -- CVSS base score
+    published_date DATETIME,          -- Date when the vulnerability was published
+    last_modified_date DATETIME       -- Date when the vulnerability was last updated
+);

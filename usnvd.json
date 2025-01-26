@@ -1,0 +1,18 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "CVE-2025-12345",
+      "description": "Buffer overflow in XYZ software allows remote attackers to execute arbitrary code.",
+      "severity": 7.5,
+      "published_date": "2025-01-01T10:00:00Z",
+      "last_modified_date": "2025-01-10T12:00:00Z"
+    },
+    {
+      "id": "CVE-2025-67890",
+      "description": "SQL injection vulnerability in ABC web application could allow an attacker to retrieve sensitive data.",
+      "severity": 8.0,
+      "published_date": "2025-01-05T14:00:00Z",
+      "last_modified_date": "2025-01-15T09:30:00Z"
+    }
+  ]
+}
