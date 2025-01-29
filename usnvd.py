@@ -1,39 +1,62 @@
-import json
 import mysql.connector
-from datetime import datetime
-# Connect to the MySQL database
-conn = mysql.connector.connect(
-    host="localhost",         # Replace with your host
-    user="root",          # Replace with your MySQL username
-    password="Aasath@7862",      # Replace with your MySQL password
-    database="usnvd"         # Replace with your database name
-)
-cursor = conn.cursor()
+import time
 
-# Load JSON file
-with open("usnvd.json") as f:
-    data = json.load(f)
+BINLOG_FILE = 'AASATH-bin.000048'  # Update with your log file name
+BINLOG_POSITION = 0  # Start from the beginning (adjust this as needed)
 
-# Insert data into the database
-for item in data['vulnerabilities']:
-    cve_id = item['id']
-    description = item['description']
-    published_date_str = item['published_date']
-    last_modified_date_str = item['last_modified_date']
-    severity = item.get('severity', None)
-    published_date = datetime.strptime(published_date_str, "%Y-%m-%dT%H:%M:%SZ")
-    last_modified_date = datetime.strptime(last_modified_date_str, "%Y-%m-%dT%H:%M:%SZ")
-    # Insert into vulnerabilities table
-    cursor.execute("""
-        INSERT INTO vulnerabilities (id, description, severity, published_date, last_modified_date)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (cve_id, description, severity, published_date, last_modified_date))
+def extract_row_data(event):
+    """Helper function to extract row data from binlog event."""
+    event_type = event[2]
+    
+    # Handle INSERT, UPDATE, and DELETE events
+    if event_type == 'Write_rows':
+        # Extract and display inserted rows
+        print("Inserted Rows:")
+        for row in event[5]:
+            print(row)
+    elif event_type == 'Update_rows':
+        # Extract and display updated rows (before and after)
+        print("Updated Rows:")
+        for row in event[5]:
+            print(f"Before: {row[0]} | After: {row[1]}")
+    elif event_type == 'Delete_rows':
+        # Extract and display deleted rows
+        print("Deleted Rows:")
+        for row in event[5]:
+            print(row)
 
-# Commit the transaction to save changes
-conn.commit()
+def process_binlog_events():
+    """Function to read binlog events and extract data."""
+    connection = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='Aasath@7862',
+        database='usnvd'
+    )
+    
+    cursor = connection.cursor()
+    
+    # Fetch binlog events starting from the provided log file and position
+    cursor.execute(f"SHOW BINLOG EVENTS IN '{BINLOG_FILE}' FROM {BINLOG_POSITION}")
 
-# Close the cursor and connection
-cursor.close()
-conn.close()
+    for event in cursor:
+        # Check if the event is a CRUD operation
+        if event[2] in ['Write_rows', 'Update_rows', 'Delete_rows']:
+            extract_row_data(event)
+    
+    
+    # Close the cursor and connection
+    cursor.close()
+    connection.close()
 
-print("Data successfully inserted into the MySQL database!")
+# Poll for changes in the binlog
+def poll_for_changes():
+    while True:
+        try:
+            process_binlog_events()
+        except Exception as e:
+            print(f"Error: {e}")
+        time.sleep(5)  # Wait for a few seconds before checking again
+
+# Start the process
+poll_for_changes()
