@@ -87,8 +87,7 @@ def process_binlog(timeout=TIMEOUT):
                     event_data = {
                         "operation": "UPDATE",
                         "table": table,
-                        "before": format_row(table, row["before_values"]),
-                        "after": format_row(table, row["after_values"])
+                        "data": format_row(table, row["after_values"])
                     }
                 elif isinstance(binlog_event, DeleteRowsEvent):
                     event_data = {
