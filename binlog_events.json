@@ -1,343 +1,68 @@
 [
     {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "1",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "18",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "199",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "2",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "208",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "22",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "24",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "27",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "278",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "288",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "2888",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "28908",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "28998",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "29",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "2998",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "3",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "4",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "444",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "5",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "777",
-            "description": "A",
-            "severity": 9.0,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
+        "operation": "INSERT",
         "table": "vulnerabilities",
         "data": {
             "id": "8",
-            "description": "charlie.brown@example.com",
-            "severity": 7.5,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "88",
-            "description": "charlie.brown@example.com",
-            "severity": 7.5,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "9",
-            "description": "charlie.brown@example.com",
-            "severity": 7.5,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "99",
-            "description": "charlie.brown@example.com",
-            "severity": 7.5,
-            "published_date": null,
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "CVE-2025-12345",
-            "description": "Buffer overflow in XYZ software allows remote attackers to execute arbitrary code.",
-            "severity": 7.5,
-            "published_date": "2025-01-01 10:00:00",
-            "last_modified_date": "2025-01-30 10:54:13"
-        }
-    },
-    {
-        "operation": "UPDATE",
-        "table": "vulnerabilities",
-        "data": {
-            "id": "CVE-2025-67890",
-            "description": "SQL injection vulnerability in ABC web application could allow an attacker to retrieve sensitive data.",
+            "description": "A",
             "severity": 9.0,
-            "published_date": "2025-01-05 14:00:00",
-            "last_modified_date": "2025-01-30 10:54:13"
+            "published_date": null,
+            "last_modified_date": null
         }
     },
     {
         "operation": "INSERT",
         "table": "vulnerabilities",
         "data": {
-            "id": "47",
-            "description": "A",
+            "id": "11",
+            "description": "Abcd",
             "severity": 9.0,
             "published_date": null,
-            "last_modified_date": "2025-01-30 10:56:21"
+            "last_modified_date": null
         }
     },
     {
-        "operation": "UPDATE",
+        "operation": "INSERT",
         "table": "vulnerabilities",
         "data": {
-            "id": "47",
-            "description": "A",
+            "id": "13",
+            "description": "Abcd",
             "severity": 9.0,
             "published_date": null,
-            "last_modified_date": "2025-01-30 10:57:39"
+            "last_modified_date": "2025-01-31 14:16:46"
         }
     },
     {
-        "operation": "UPDATE",
+        "operation": "INSERT",
         "table": "vulnerabilities",
         "data": {
-            "id": "47",
-            "description": "A",
+            "id": "34",
+            "description": "Abcd",
             "severity": 9.0,
             "published_date": null,
-            "last_modified_date": "2025-01-30 10:59:39"
+            "last_modified_date": "2025-01-31 14:25:38"
         }
     },
     {
-        "operation": "UPDATE",
+        "operation": "INSERT",
         "table": "vulnerabilities",
         "data": {
-            "id": "47",
-            "description": "A",
-            "severity": 9.0,
+            "id": "37",
+            "description": "Abcd",
+            "severity": 8.5,
             "published_date": null,
-            "last_modified_date": "2025-01-30 11:59:21"
+            "last_modified_date": "2025-01-31 14:28:00"
         }
     },
     {
-        "operation": "UPDATE",
+        "operation": "INSERT",
         "table": "vulnerabilities",
         "data": {
-            "id": "47",
-            "description": "A",
-            "severity": 9.0,
+            "id": "57",
+            "description": "mysql issue",
+            "severity": 8.5,
             "published_date": null,
-            "last_modified_date": "2025-01-30 12:59:21"
+            "last_modified_date": "2025-01-31 14:42:35"
         }
     },
     {
@@ -345,10 +70,10 @@
         "table": "vulnerabilities",
         "data": {
             "id": "48",
-            "description": "Aasath",
-            "severity": 9.0,
+            "description": "Athyul",
+            "severity": 8.899999618530273,
             "published_date": null,
-            "last_modified_date": "2025-01-30 12:59:21"
+            "last_modified_date": "2025-01-31 19:12:27"
         }
     }
 ]

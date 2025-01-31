@@ -54,6 +54,8 @@ try:
             else:
                 print("No date provided.")
         else:
+            if 'id' in row_data:
+                del row_data['id']
             columns = ", ".join(row_data.keys())
             placeholders = ", ".join(["%s"] * len(row_data))  
             values = tuple(row_data.values())

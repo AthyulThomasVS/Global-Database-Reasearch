@@ -1,0 +1,13 @@
+[
+    {
+        "operation": "INSERT",
+        "table": "vulnerabilities",
+        "data": {
+            "id": "8",
+            "description": "A",
+            "severity": 9.0,
+            "published_date": null,
+            "last_modified_date": null
+        }
+    }
+]

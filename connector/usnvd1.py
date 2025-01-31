@@ -62,9 +62,11 @@ def process_binlog(timeout=TIMEOUT):
     stream = BinLogStreamReader(
         connection_settings=MYSQL_SETTINGS,
         server_id=100,
-        only_schemas=["usnvd"],
+        only_schemas=["sourcedb"],
         only_events=[WriteRowsEvent, UpdateRowsEvent, DeleteRowsEvent],
-        blocking=True
+        blocking=True,
+        resume_stream=False  # Ensure fresh start
+        
     )
 
     # Set up a timer to stop after the timeout
