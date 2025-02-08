@@ -6,13 +6,20 @@ import time
 # JVN API Endpoint
 BASE_URL = "https://jvndb.jvn.jp/myjvn"
 
+# Define XML namespaces
+NAMESPACES = {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rss": "http://purl.org/rss/1.0/",
+    "jvn": "http://jvndb.jvn.jp/rss/"
+}
+
 # Function to fetch and parse vulnerabilities
 def fetch_latest_vulnerabilities():
     params = {
         'method': 'getVulnOverviewList',
         'feed': 'hnd',  
         'startItem': 1,
-        'maxCount': 5,
+        'maxCount': 10,  # Increased count to fetch more data
         'datePublished': '2025-01-01'
     }
 
@@ -28,19 +35,28 @@ def fetch_latest_vulnerabilities():
 
         # Find all <item> elements in the XML
         vulnerabilities = []
-        for item in root.findall(".//{http://purl.org/rss/1.0/}item"):
-            title = item.find("{http://purl.org/rss/1.0/}title")
-            link = item.find("{http://purl.org/rss/1.0/}link")
-            description = item.find("{http://purl.org/rss/1.0/}description")
-            date = item.find("{http://jvndb.jvn.jp/rss/}date")
+        for item in root.findall(".//rss:item", NAMESPACES):
+            vuln_data = {}
 
-            vuln = {
-                "title": title.text if title is not None else "N/A",
-                "link": link.text if link is not None else "N/A",
-                "description": description.text if description is not None else "N/A",
-                "date": date.text if date is not None else "N/A",
-            }
-            vulnerabilities.append(vuln)
+            # Look for an identifier field in the item element
+          
+            identifier = item.find(".//jvn:identifier", NAMESPACES)  # Try to find identifier
+
+            if identifier is not None:
+                vuln_data["cveid"] = identifier.text
+            else:
+                # Fallback if not found
+                vuln_data["cveid"] = "N/A"
+
+            # Loop through each child element in item to get other fields
+            vuln_data["db"] = "jvn"
+            for child in item:
+                tag = child.tag.split("}")[-1]  # Remove namespace
+
+                # Add the other fields to the vuln_data
+                vuln_data[tag] = child.text if child.text else "N/A"
+
+            vulnerabilities.append(vuln_data)
 
         return vulnerabilities
 
@@ -49,7 +65,7 @@ def fetch_latest_vulnerabilities():
         return []
 
 # Function to save data to JSON file
-def save_to_json(data, filename="jvn_data.json"):
+def save_to_json(data, filename="dummyab.json"):
     with open(filename, "w", encoding='utf-8') as json_file:
         json.dump(data, json_file, ensure_ascii=False, indent=4)
 
@@ -59,7 +75,7 @@ if __name__ == "__main__":
         vuln_data = fetch_latest_vulnerabilities()
         if vuln_data:
             save_to_json(vuln_data)
-            print(f"Data saved to jvn_data.json")
+            print(f"Data saved to dummyss.json")
         else:
             print("No new data fetched.")
         print("\nWaiting for the next update...\n")

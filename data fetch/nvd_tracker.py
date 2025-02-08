@@ -12,7 +12,7 @@ BASE_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 def fetch_latest_cves():
     headers = {"apiKey": API_KEY} if API_KEY else {}
     params = {
-        "resultsPerPage": 10,  # Fetch 5 latest vulnerabilities
+        "resultsPerPage": 10,  # Fetch the latest 10 vulnerabilities
         "startIndex": 0,
     }
 
@@ -23,14 +23,23 @@ def fetch_latest_cves():
         response.raise_for_status()
         data = response.json()
 
-        # Extract and store CVE details
+        # Extract and store CVE details with all available fields
         for cve in data.get("vulnerabilities", []):
             cve_data = cve.get("cve", {})
             cve_entry = {
+                "db":"usnvd",
                 "id": cve_data.get("id"),
                 "description": cve_data.get("descriptions", [{}])[0].get("value", "No description"),
                 "published": cve_data.get("published"),
-                "severity": cve_data.get("metrics", {}).get("cvssMetricV31", [{}])[0].get("cvssData", {}).get("baseSeverity", "Unknown")
+                "modified": cve_data.get("lastModified"),
+                "source_identifier": cve_data.get("sourceIdentifier"),
+                "cvss_v3": cve_data.get("metrics", {}).get("cvssMetricV31", [{}])[0].get("cvssData", {}),
+                "cvss_v2": cve_data.get("metrics", {}).get("cvssMetricV2", [{}])[0].get("cvssData", {}),
+                "impact": cve_data.get("impact", {}),
+                "references": cve_data.get("references", []),
+                "configurations": cve_data.get("configurations", {}),
+                "published_date": cve_data.get("published"),
+                "last_modified_date": cve_data.get("lastModified"),
             }
             cve_list.append(cve_entry)
 
