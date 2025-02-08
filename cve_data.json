@@ -745,7 +745,6 @@
         "last_modified_date": "2024-11-20T23:28:08.290"
     },
     {
-        "db": "usnvd",
         "id": "CVE-1999-1198",
         "description": "BuildDisk program on NeXT systems before 2.0 does not prompt users for the root password, which allows local users to gain root privileges.",
         "published": "1990-10-03T04:00:00.000",
