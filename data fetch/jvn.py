@@ -2,81 +2,84 @@ import requests
 import xml.etree.ElementTree as ET
 import json
 import time
+from datetime import datetime
 
-# JVN API Endpoint
+
 BASE_URL = "https://jvndb.jvn.jp/myjvn"
+today_date = datetime.now().strftime("%Y-%m-%d")
 
-# Define XML namespaces
+
 NAMESPACES = {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rss": "http://purl.org/rss/1.0/",
     "jvn": "http://jvndb.jvn.jp/rss/"
 }
 
-# Function to fetch and parse vulnerabilities
-def fetch_latest_vulnerabilities():
-    params = {
-        'method': 'getVulnOverviewList',
-        'feed': 'hnd',  
-        'startItem': 1,
-        'maxCount': 10,  # Increased count to fetch more data
-        'datePublished': '2025-01-01'
-    }
 
-    try:
-        response = requests.get(BASE_URL, params=params)
-        response.raise_for_status()
+def fetch_all_vulnerabilities():
+    all_vulnerabilities = []
+    start_item = 1
+    batch_size = 100 
 
-        # Print the raw XML response for debugging
-        print("Raw XML Response:", response.text[:500])  # Print first 500 chars
+    while True:
+        params = {
+            'method': 'getVulnOverviewList',
+            'feed': 'hnd',  
+            'startItem': start_item,
+            'maxCount': batch_size,  
+            'datePublished': today_date
+        }
 
-        # Parse XML response with namespaces
-        root = ET.fromstring(response.text)
+        try:
+            response = requests.get(BASE_URL, params=params)
+            response.raise_for_status()
 
-        # Find all <item> elements in the XML
-        vulnerabilities = []
-        for item in root.findall(".//rss:item", NAMESPACES):
-            vuln_data = {}
+            
+            root = ET.fromstring(response.text)
 
-            # Look for an identifier field in the item element
           
-            identifier = item.find(".//jvn:identifier", NAMESPACES)  # Try to find identifier
+            vulnerabilities = []
+            for item in root.findall(".//rss:item", NAMESPACES):
+                vuln_data = {"db": "jvn"}
 
-            if identifier is not None:
-                vuln_data["cveid"] = identifier.text
-            else:
-                # Fallback if not found
-                vuln_data["cveid"] = "N/A"
+    
+                identifier = item.find(".//jvn:identifier", NAMESPACES)
+                vuln_data["cveid"] = identifier.text if identifier is not None else "N/A"
 
-            # Loop through each child element in item to get other fields
-            vuln_data["db"] = "jvn"
-            for child in item:
-                tag = child.tag.split("}")[-1]  # Remove namespace
+   
+                for child in item:
+                    tag = child.tag.split("}")[-1]  
+                    vuln_data[tag] = child.text if child.text else "N/A"
 
-                # Add the other fields to the vuln_data
-                vuln_data[tag] = child.text if child.text else "N/A"
+                vulnerabilities.append(vuln_data)
 
-            vulnerabilities.append(vuln_data)
+            if not vulnerabilities:
+                break  
 
-        return vulnerabilities
+            all_vulnerabilities.extend(vulnerabilities)
+            start_item += batch_size  
 
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
-        return []
+            print(f"Fetched {len(vulnerabilities)} vulnerabilities, total: {len(all_vulnerabilities)}")
 
-# Function to save data to JSON file
-def save_to_json(data, filename="dummyab.json"):
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data: {e}")
+            break
+
+    return all_vulnerabilities
+
+
+def save_to_json(data, filename="jvn_data.json"):
     with open(filename, "w", encoding='utf-8') as json_file:
         json.dump(data, json_file, ensure_ascii=False, indent=4)
 
-if __name__ == "__main__":
+def jvn():
     while True:
-        print("\nFetching latest vulnerabilities from JVN...")
-        vuln_data = fetch_latest_vulnerabilities()
+        print("\nFetching all vulnerabilities from JVN...")
+        vuln_data = fetch_all_vulnerabilities()
         if vuln_data:
             save_to_json(vuln_data)
-            print(f"Data saved to dummyss.json")
+            print(f"Data saved to jvn_data.json")
         else:
             print("No new data fetched.")
-        print("\nWaiting for the next update...\n")
-        time.sleep(3600)  # Wait 1 hour before the next fetch
+        print("\nWaiting for the next daily update...\n")
+        time.sleep(86400)  
